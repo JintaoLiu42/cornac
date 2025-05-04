@@ -246,16 +246,29 @@ class DMRL(Recommender):
 
         self.sampler = PWLearningSampler(train_set, num_neg=self.num_neg)
 
-        self.model = DMRLModel(
-            self.num_users,
-            self.num_items,
-            self.embedding_dim,
-            self.text_dim,
-            self.image_dim,
-            self.dropout,
-            self.num_neg,
-            self.num_factors,
-        ).to(self.device)
+        # self.model = DMRLModel(
+        #     self.num_users,
+        #     self.num_items,
+        #     self.embedding_dim,
+        #     self.text_dim,
+        #     self.image_dim,
+        #     self.dropout,
+        #     self.num_neg,
+        #     self.num_factors,
+        # ).to(self.device)
+        model_initialized_flag = getattr(self, 'model', None)
+        if not model_initialized_flag:
+            self.model = DMRLModel(
+                self.num_users,
+                self.num_items,
+                self.embedding_dim,
+                self.text_dim,
+                self.image_dim,
+                self.dropout,
+                self.num_neg,
+                self.num_factors,
+            ).to(self.device)
+
 
         loss_function = DMRLLoss(
             decay_c=1e-3, num_factors=self.num_factors, num_neg=self.num_neg

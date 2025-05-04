@@ -144,7 +144,10 @@ def rm_dup_spaces(t: str) -> str:
     return re.sub(' {2,}', ' ', t)
 
 
-DEFAULT_PRE_RULES = [lambda t: t.lower(), rm_tags, rm_numeric, rm_punctuation, rm_dup_spaces]
+# DEFAULT_PRE_RULES = [lambda t: t.lower(), rm_tags, rm_numeric, rm_punctuation, rm_dup_spaces]
+def to_lowercase(text): 
+    return text.lower()
+DEFAULT_PRE_RULES = [to_lowercase, rm_tags, rm_numeric, rm_punctuation, rm_dup_spaces]
 
 
 class BaseTokenizer(Tokenizer):
