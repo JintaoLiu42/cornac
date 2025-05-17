@@ -385,7 +385,8 @@ class DMRL(Recommender):
                 # Gather data and report
                 running_loss += loss.item()
                 devider = 5
-                if i % devider == 4:
+                # if i % devider == 4:
+                if 1:
                     last_loss = running_loss / devider  # loss per batch
                     # last_loss = running_loss / (i + 1)
                     print("  batch {} loss: {}".format(i + 1, last_loss))
